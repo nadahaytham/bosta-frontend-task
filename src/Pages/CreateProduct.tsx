@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCategories, createProduct } from "../Api/productend";
 
+//Allows authenticated users to add new products
 export default function CreateProduct() {
   const navigate = useNavigate();
 
@@ -16,6 +17,7 @@ export default function CreateProduct() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
+  // Fetch categories
   useEffect(() => {
     getCategories().then(res => setCategories(res.data));
   }, []);
@@ -23,6 +25,7 @@ export default function CreateProduct() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validation
     if (!title || !description || !price || !category || !image) {
       setError("All fields are required.");
       return;
@@ -43,6 +46,7 @@ export default function CreateProduct() {
         price: Number(price),
         category,
         image,
+        id: 0 // FakeStore requires id field
       });
 
       setSuccess(true);

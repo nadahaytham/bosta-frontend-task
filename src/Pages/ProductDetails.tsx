@@ -5,7 +5,9 @@ import { getProductById } from "../Api/productend";
 import { addToCart } from "../Features/cartSlice";
 import { useAppDispatch, useAppSelector} from "../Store/hooks";
 import { FiShoppingCart } from "react-icons/fi";
-import { Link } from "react-router-dom";
+
+//Displays full product info and allows adding to cart
+
 export default function ProductDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,8 +16,11 @@ export default function ProductDetails() {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  // Calculate cart badge count
   const cartCount = cartItems.reduce((sum, i) => sum + i.quantity, 0);
 
+  // Fetch product
   useEffect(() => {
     getProductById(id!)
       .then((res) => {

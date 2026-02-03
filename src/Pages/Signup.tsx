@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingBag } from "react-icons/fa";
 
+//Fake signup (stored locally due to FakeStore API limitation)
 export default function Signup() {
   const navigate = useNavigate();
 

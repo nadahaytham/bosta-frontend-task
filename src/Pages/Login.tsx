@@ -5,6 +5,7 @@ import { useAppDispatch } from "../Store/hooks";
 import { loginSuccess } from "../Features/authSlice";
 import { FaShoppingBag } from "react-icons/fa";
 
+//Authenticates user using FakeStore API
 export default function Login() {
   const [username, setUsername] = useState(localStorage.getItem("signup_username") || "mor_2314");
   const [password, setPassword] = useState(localStorage.getItem("signup_password") || "83r5^_");
@@ -21,6 +22,7 @@ export default function Login() {
     try {
       const res = await loginUser({ username, password });
 
+      // Save auth data to Redux + localStorage
       dispatch(loginSuccess({ token: res.data.token, username }));
 
       navigate("/");

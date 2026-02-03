@@ -1,19 +1,37 @@
-import axios from "./axios";
+import api from "./axios";
+import { Product } from "../Types/products";
 
+/**
+ * Fetch all products
+ */
 export const getProducts = () => {
-  return axios.get("/products");
+  return api.get<Product[]>("/products");
 };
 
+/**
+ * Fetch single product by ID "View Details"
+ */
 export const getProductById = (id: string) => {
-  return axios.get(`/products/${id}`);
+  return api.get<Product>(`/products/${id}`);
 };
+
+/**
+ * Fetch available product categories "Filter By Category"
+ */
 export const getCategories = () => {
-    return axios.get("/products/categories");
-  };
-  
-  export const createProduct = (data: any) => {
-    return axios.post("/products", data);
-  };
-  export const loginUser = (data: { username: string; password: string }) => {
-    return axios.post("/auth/login", data);
-  }; 
+  return api.get<string[]>("/products/categories");
+};
+
+/**
+ * Create new product
+ */
+export const createProduct = (data: Product) => {
+  return api.post("/products", data);
+};
+
+/**
+ * Login user
+ */
+export const loginUser = (data: { username: string; password: string }) => {
+  return api.post("/auth/login", data);
+};

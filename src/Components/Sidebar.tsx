@@ -5,18 +5,19 @@ interface Props {
   onClose: () => void;
 }
 
+//Appears when menu button is clicked
 export default function Sidebar({ open, onClose }: Props) {
   if (!open) return null;
 
   return (
     <>
-      {/* Overlay */}
+      {/* Background Overlay */}
       <div
         className="fixed inset-0 bg-black/30 z-40"
         onClick={onClose}
       />
 
-      {/* Sidebar */}
+      {/* Sidebar Container */}
       <aside className="fixed top-12 left-0 h-full w-56 sm:w-48 bg-red-500 p-4 z-50 shadow-lg">
 
         {/* Sidebar Header */}
@@ -24,7 +25,7 @@ export default function Sidebar({ open, onClose }: Props) {
           Menu
         </div>
 
-        {/* Links */}
+        {/* Navigation */}
         <nav className="flex flex-col gap-2 text-sm text-white">
           <Link
             to="/create"

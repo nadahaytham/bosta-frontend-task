@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AuthState } from "../Types/authorization";
 
+//Token and username using localStorage
 const initialState: AuthState = {
   token: localStorage.getItem("token"),
   username: localStorage.getItem("username"),
@@ -17,7 +18,8 @@ const authSlice = createSlice({
       localStorage.setItem("token", action.payload.token);
       localStorage.setItem("username", action.payload.username);
     },
-
+    
+    //Clear authentication data on logout
     logout(state) {
       state.token = null;
       state.username = null;

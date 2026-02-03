@@ -8,7 +8,6 @@ import { addToCart } from "../Features/cartSlice";
 export default function Products() {
   const dispatch = useAppDispatch();
   const { items, loading, error } = useAppSelector((state) => state.products);
-
   const [sort, setSort] = useState("none");
   const [category, setCategory] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,19 +21,22 @@ export default function Products() {
     dispatch(fetchProducts());
   }, []);
 
+  // Reset pagination when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [sort, category]);
 
+  // Filter by category
   let filtered =
     category === "all" ? items : items.filter((p) => p.category === category);
 
+  // Sort by price
   if (sort === "asc") filtered = [...filtered].sort((a, b) => a.price - b.price);
   if (sort === "desc")
     filtered = [...filtered].sort((a, b) => b.price - a.price);
 
+  // Pagination logic
   const totalPages = Math.ceil(filtered.length / PER_PAGE);
-
   const paginated = filtered.slice(
     (currentPage - 1) * PER_PAGE,
     currentPage * PER_PAGE

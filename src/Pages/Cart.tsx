@@ -1,10 +1,13 @@
 import { useAppDispatch, useAppSelector } from "../Store/hooks";
 import { removeFromCart, updateQuantity } from "../Features/cartSlice";
 
+
+//Displays selected products, quantities, and total price
 export default function Cart() {
   const { items } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
+  // Calculate total cart price
   const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
   if (!items.length)
@@ -26,7 +29,7 @@ export default function Cart() {
             />
 
             <div className="flex-1">
-
+              {/* Product Info */}
               <p className="text-xs font-semibold line-clamp-2">
                 {item.title}
               </p>
@@ -36,7 +39,7 @@ export default function Cart() {
               </p>
 
               <div className="flex items-center gap-2 mt-2">
-
+                {/* Quantity */}
                 <input
                   type="number"
                   min={1}
@@ -49,27 +52,23 @@ export default function Cart() {
                       })
                     )
                   }
-                  className="border w-12 text-xs text-center"
-                />
-
+                  className="border w-12 text-xs text-center"/>
+        
                 <span className="text-xs">
                   = ${(item.price * item.quantity).toFixed(2)}
                 </span>
 
               </div>
-
             </div>
-
+        {/* Remove from cart */}
             <button
               onClick={() => dispatch(removeFromCart(item.id))}
-              className="text-red-500 text-sm"
-            >
+              className="text-red-500 text-sm">
               ✕
             </button>
-
           </div>
         ))}
-
+        {/* Total Amount */}
         <p className="text-sm font-bold mt-4 text-center">
           Total: ${total.toFixed(2)}
         </p>
