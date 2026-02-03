@@ -1,12 +1,15 @@
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../Store/hooks";
+import { ReactNode } from "react";
 
-//Redirects unauthenticated users to Login page.
-export default function ProtectedRoute({ children }: { children: JSX.Element }) {
+interface Props {
+  children: ReactNode;
+}
+
+export default function ProtectedRoute({ children }: Props) {
   const token = useAppSelector((state) => state.auth.token);
-  
-  // If user is not authenticated, redirect to login
+
   if (!token) return <Navigate to="/login" />;
 
-  return children;
+  return <>{children}</>;
 }
